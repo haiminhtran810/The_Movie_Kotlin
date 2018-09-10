@@ -4,10 +4,13 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 26
     flavorDimensions "default"
     defaultConfig {
+        multiDexEnabled true
         applicationId "vn.home.app.themoviekotlin"
         minSdkVersion 21
         targetSdkVersion 26
@@ -97,4 +100,19 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    // dagger 2
+    compile 'com.google.dagger:dagger:2.17'
+    kapt "com.google.dagger:dagger-compiler:2.17"
+
+    // dagger 2 android
+    implementation "com.google.dagger:dagger-android:2.17"
+    implementation "com.google.dagger:dagger-android-support:2.17"
+    kapt "com.google.dagger:dagger-android-processor:2.17"
+
+    // retrofit
+
+    // rxjava
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
 }
