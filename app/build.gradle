@@ -103,6 +103,7 @@ android {
         def SMALL_IMAGE_URL = "https://image.tmdb.org/t/p/w200"
         def LARGE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"
         def ORIGINAL_IMAGE_URL = "https://image.tmdb.org/t/p/original"
+        
 
         variant.buildConfigField "String", "BASE_URL", "\"${BASE_URL}\""
         variant.buildConfigField "String", "TMBD_API_KEY", "\"${API_KEY}\""
