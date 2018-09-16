@@ -75,7 +75,7 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
     fun replaceFragment(fragment: Fragment, TAG: String?, addToBackStack: Boolean = false,
                         transit: Int = -1) {
         activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.action_container, fragment, TAG)?.apply {
+                ?.replace(R.id.container, fragment, TAG)?.apply {
                     commitTransaction(this, addToBackStack, transit)
                 }?.commit()
     }

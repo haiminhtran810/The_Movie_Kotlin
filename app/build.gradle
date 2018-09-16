@@ -24,7 +24,18 @@ android {
             // xuất ra lỗi
             debuggable false
             // tối ưu hóa
+            // Shrink your code
+            //Be aware that code shrinking slows down the build time
             minifyEnabled true
+            // mã hóa
+            useProguard true
+            // Tối giản res
+            //Resource shrinking is available with the Android plugin for Gradle,
+            // which removes unused resources from your packaged app, including unused resources in code libraries
+            shrinkResources = true
+            // the proguardFiles property specifies the following ProGuard rules
+            //Tip: For even more code shrinking, try the proguard-android-optimize.txt file located in the same directory.
+            // It includes the same ProGuard rules, but with other optimizations that perform analysis at the bytecode level—inside and across methods—to reduce your APK size further and help it run faster.
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         mock {
@@ -32,6 +43,7 @@ android {
             // xuất ra lỗi
             debuggable true
             // tối ưu hóa
+            useProguard false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -39,6 +51,7 @@ android {
             buildConfigField "boolean", "MOCK_DATA", "false"
             // xuất ra lỗi
             debuggable true
+            useProguard false
             // tối ưu hóa
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -87,8 +100,15 @@ android {
     applicationVariants.all { variant ->
         def BASE_URL = "https://api.themoviedb.org/"
         def API_KEY = "5fc3a402d4d344ccbb0b1b0f001fc992"
+        def SMALL_IMAGE_URL = "https://image.tmdb.org/t/p/w200"
+        def LARGE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"
+        def ORIGINAL_IMAGE_URL = "https://image.tmdb.org/t/p/original"
+
         variant.buildConfigField "String", "BASE_URL", "\"${BASE_URL}\""
         variant.buildConfigField "String", "TMBD_API_KEY", "\"${API_KEY}\""
+        variant.buildConfigField "String", "SMALL_IMAGE_URL", "\"${SMALL_IMAGE_URL}\""
+        variant.buildConfigField "String", "LARGE_IMAGE_URL", "\"${LARGE_IMAGE_URL}\""
+        variant.buildConfigField "String", "ORIGINAL_IMAGE_URL", "\"${ORIGINAL_IMAGE_URL}\""
     }
 }
 
@@ -96,6 +116,10 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation "com.android.support:appcompat-v7:$version_sp"
+    implementation "com.android.support:support-v4:$version_sp"
+    implementation "com.android.support:recyclerview-v7:27.1.1"
+    implementation "com.android.support:cardview-v7:27.1.1"
+    implementation "com.android.support:design:27.1.1"
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
