@@ -11,7 +11,8 @@ import javax.inject.Inject
 
 //Generate graph object
 class MainApplication : Application(), HasActivityInjector {
-    override fun activityInjector(): AndroidInjector<Activity> = dispatchingAndroidInjector
+
+    override fun activityInjector(): AndroidInjector<Activity> = activityInjector
 
     override fun onCreate() {
         super.onCreate()
@@ -19,5 +20,6 @@ class MainApplication : Application(), HasActivityInjector {
     }
 
     @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Activity>
+    lateinit var activityInjector : DispatchingAndroidInjector<Activity>
+
 }

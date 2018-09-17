@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import dagger.android.support.AndroidSupportInjection
 import vn.home.app.themoviekotlin.R
 import vn.home.app.themoviekotlin.base.navigator.BaseNavigator
 import vn.home.app.themoviekotlin.base.viewmodel.BaseViewModel
@@ -26,7 +27,8 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
     @get:LayoutRes
     abstract val layoutId: Int
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?): View? {
         viewDataBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         return viewDataBinding.root
     }
@@ -48,13 +50,13 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
         super.onAttach(context)
     }
 
-    private fun performDependencyInjection() {
-
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         viewModel.onActivityDestroy()
+    }
+
+    private fun performDependencyInjection() {
+        AndroidSupportInjection.inject(this)
     }
 
     override fun onBack() {
@@ -73,7 +75,7 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
     }
 
     fun replaceFragment(fragment: Fragment, TAG: String?, addToBackStack: Boolean = false,
-                        transit: Int = -1) {
+            transit: Int = -1) {
         activity?.supportFragmentManager?.beginTransaction()
                 ?.replace(R.id.container, fragment, TAG)?.apply {
                     commitTransaction(this, addToBackStack, transit)
@@ -88,7 +90,8 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
         commitTransaction(transaction, addToBackStack, transit)
     }
 
-    fun commitTransaction(transaction: FragmentTransaction?, addToBackStack: Boolean, transit: Int) {
+    fun commitTransaction(transaction: FragmentTransaction?, addToBackStack: Boolean,
+            transit: Int) {
         if (addToBackStack) transaction?.addToBackStack(null)
         //Select a standard transition animation for this transaction.
         // May be one of TRANSIT_NONE, TRANSIT_FRAGMENT_OPEN, TRANSIT_FRAGMENT_CLOSE, or TRANSIT_FRAGMENT_FADE.
@@ -98,8 +101,10 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
 
     fun addChildFragment(
             parentFragment: Fragment = this, containerViewId: Int,
-            targetFragment: Fragment, TAG: String?, addToBackStack: Boolean = false, transit: Int = -1) {
-        val transaction = parentFragment.childFragmentManager.beginTransaction().add(containerViewId, targetFragment, TAG)
+            targetFragment: Fragment, TAG: String?, addToBackStack: Boolean = false,
+            transit: Int = -1) {
+        val transaction = parentFragment.childFragmentManager.beginTransaction().add(
+                containerViewId, targetFragment, TAG)
         commitTransaction(transaction, addToBackStack, transit)
     }
 
