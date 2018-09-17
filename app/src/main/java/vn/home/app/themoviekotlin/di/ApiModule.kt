@@ -21,10 +21,12 @@ class ApiModule {
         const val TIME_OUT = 10
     }
 
+    // Provides phải cần giá trị trả về như return
+    // Singleton tạo vào dụng lại ko có xóa đi
     @Provides
     @Singleton
     @Named("okHttp_client")
-    fun provideOkHttpClient(@Named("cache") cache: Cache, @Named("header") header: Interceptor, @Named("logging") logging: Interceptor): OkHttpClient {
+    internal fun provideOkHttpClient(@Named("cache") cache: Cache, @Named("header") header: Interceptor, @Named("logging") logging: Interceptor): OkHttpClient {
         return OkHttpClient.Builder().cache(cache)
                 .addInterceptor(header)
                 .addInterceptor(logging)
@@ -36,7 +38,7 @@ class ApiModule {
     @Provides
     @Singleton
     @Named("header")
-    fun provideHeaderInterceptor(): Interceptor {
+    internal fun provideHeaderInterceptor(): Interceptor {
         return Interceptor { chain ->
             val request = chain.request()
             val newUrl = request.url().newBuilder().addQueryParameter("api_key", BuildConfig.TMBD_API_KEY).build()
@@ -50,7 +52,7 @@ class ApiModule {
     @Provides
     @Singleton
     @Named("app_retrofit")
-    fun provideRetrofit(@Named("okHttp_client") okHttpClient: OkHttpClient): Retrofit {
+    internal fun provideRetrofit(@Named("okHttp_client") okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -59,7 +61,7 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideApiService(@Named("app_retrofit") retrofit: Retrofit): ApiService {
+    internal fun provideApiService(@Named("app_retrofit") retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
 
@@ -68,7 +70,7 @@ class ApiModule {
     @Provides
     @Singleton
     @Named("cache")
-    fun provideCache(application: Application): Cache {
+    internal fun provideCache(application: Application): Cache {
         val cacheSize = 10 * 1024 * 1024
         return Cache(application.cacheDir, cacheSize.toLong())
     }
@@ -76,7 +78,7 @@ class ApiModule {
     @Provides
     @Singleton
     @Named("logging")
-    fun provideLogging(): Interceptor {
+    internal fun provideLogging(): Interceptor {
         val logging = HttpLoggingInterceptor()
         logging.level =
                 if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY

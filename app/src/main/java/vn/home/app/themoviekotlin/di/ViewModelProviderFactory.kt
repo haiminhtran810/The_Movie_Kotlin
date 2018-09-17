@@ -2,6 +2,7 @@ package vn.home.app.themoviekotlin.di
 
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
+import dagger.multibindings.Multibinds
 import javax.inject.Inject
 import javax.inject.Singleton
 import javax.inject.Provider
@@ -18,8 +19,9 @@ class ViewModelProviderFactory @Inject constructor(
 
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         val creator = creators[modelClass]
-                ?: creators.asIterable().firstOrNull { modelClass.isAssignableFrom(it.key) }?.value
-                ?: throw IllegalArgumentException("unknown model class " + modelClass)
+                ?: creators.asIterable().firstOrNull {
+                    modelClass.isAssignableFrom(it.key)
+                }?.value ?: throw IllegalArgumentException("unknown model class $modelClass")
 
         return try {
             creator.get() as T

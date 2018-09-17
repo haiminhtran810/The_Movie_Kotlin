@@ -4,12 +4,17 @@ import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
+import dagger.android.support.AndroidSupportInjectionModule
 import vn.home.app.themoviekotlin.MainApplication
 import javax.inject.Singleton
 
 //https://medium.com/@malinitin/setup-dagger-2-11-on-kotlin-project-2257ad84ad7c
-@Component(modules = arrayOf(AppModule::class, AndroidInjectionModule::class, ActivityBuilder::class))
+//https://blog.mindorks.com/the-new-dagger-2-android-injector-cbe7d55afa6a
 @Singleton
+@Component(modules = arrayOf(
+        AndroidSupportInjectionModule::class,
+        AppModule::class,
+        MainActivityModule::class))
 interface AppComponent {
     @Component.Builder
     interface Builder {
@@ -19,5 +24,5 @@ interface AppComponent {
         fun build(): AppComponent
     }
 
-    fun inject(app: MainApplication)
+    fun inject(mainApplication: MainApplication)
 }
