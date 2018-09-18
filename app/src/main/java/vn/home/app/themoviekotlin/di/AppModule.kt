@@ -8,12 +8,11 @@ import dagger.Provides
 import vn.home.app.themoviekotlin.MainApplication
 import javax.inject.Singleton
 
-@Module(
-        includes = [
-            ViewModelModule::class,
-            ApiModule::class,
-            RepositoryModule::class
-        ])
+@Module(includes = [
+    ViewModelModule::class,
+    ApiModule::class,
+    RepositoryModule::class
+])
 class AppModule {
 
     @Provides

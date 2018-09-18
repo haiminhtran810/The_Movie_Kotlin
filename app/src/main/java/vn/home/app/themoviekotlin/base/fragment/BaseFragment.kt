@@ -1,6 +1,6 @@
 package vn.home.app.themoviekotlin.base.fragment
 
-import android.content.Context
+import android.arch.lifecycle.ViewModelProvider
 import android.databinding.DataBindingUtil
 import android.databinding.ViewDataBinding
 import android.os.Bundle
@@ -10,22 +10,26 @@ import android.support.v4.app.FragmentTransaction
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import dagger.android.support.AndroidSupportInjection
+import dagger.android.support.DaggerFragment
 import vn.home.app.themoviekotlin.R
 import vn.home.app.themoviekotlin.base.navigator.BaseNavigator
 import vn.home.app.themoviekotlin.base.viewmodel.BaseViewModel
+import javax.inject.Inject
 
 /**
  * Created by HaiMinhTran on 9/11/2018.
  */
-abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewModel> : Fragment(), BaseNavigator {
+abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewModel> : DaggerFragment(), BaseNavigator {
     lateinit var viewDataBinding: ViewBinding
-    lateinit var viewModel: ViewModel
+    abstract var viewModel: ViewModel
     abstract val bindingVariable: Int
 
     // get layout id
     @get:LayoutRes
     abstract val layoutId: Int
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?): View? {
@@ -45,18 +49,9 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
         }
     }
 
-    override fun onAttach(context: Context?) {
-        performDependencyInjection()
-        super.onAttach(context)
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         viewModel.onActivityDestroy()
-    }
-
-    private fun performDependencyInjection() {
-        AndroidSupportInjection.inject(this)
     }
 
     override fun onBack() {
