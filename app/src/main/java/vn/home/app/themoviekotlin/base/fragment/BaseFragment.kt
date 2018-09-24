@@ -19,9 +19,9 @@ import javax.inject.Inject
 /**
  * Created by HaiMinhTran on 9/11/2018.
  */
-abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewModel> : DaggerFragment(), BaseNavigator {
-    lateinit var viewDataBinding: ViewBinding
-    abstract var viewModel: ViewModel
+abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewModel<*>> : DaggerFragment(), BaseNavigator {
+    lateinit var viewBinding: ViewBinding
+    abstract val viewModel: ViewModel
     abstract val bindingVariable: Int
 
     // get layout id
@@ -33,13 +33,13 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?): View? {
-        viewDataBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        return viewDataBinding.root
+        viewBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+        return viewBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewDataBinding.apply {
+        viewBinding.apply {
             //https://developer.android.com/reference/android/databinding/ViewDataBinding
             setVariable(bindingVariable, viewModel)
             setLifecycleOwner(this@BaseFragment)
