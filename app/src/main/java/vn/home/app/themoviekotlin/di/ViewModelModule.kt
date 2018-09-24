@@ -6,8 +6,10 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import vn.home.app.themoviekotlin.MainActivityViewModel
+import vn.home.app.themoviekotlin.ui.main.MainViewModel
 import vn.home.app.themoviekotlin.ui.welcome.WelcomeViewModel
 
+@Suppress("unused")
 @Module
 abstract class ViewModelModule {
 
@@ -26,4 +28,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(WelcomeViewModel::class)
     abstract fun bindWelcomeViewModel(welcomeViewModel: WelcomeViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainViewModel::class)
+    abstract fun bindMainViewModel(mainViewModel: MainViewModel): ViewModel
 }

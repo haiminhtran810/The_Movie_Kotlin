@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import dagger.android.AndroidInjection
 import vn.home.app.themoviekotlin.base.activity.BaseActivity
+import vn.home.app.themoviekotlin.ui.welcome.WelcomeFragment
 import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
@@ -17,9 +18,12 @@ class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        /*supportFragmentManager.beginTransaction().replace(R.id.parent,
+                WelcomeFragment.newInstance(), WelcomeFragment.TAG)*/
     }
 
     override fun onBackPressed() {
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.parent)
         super.onBackPressed()
     }
 }

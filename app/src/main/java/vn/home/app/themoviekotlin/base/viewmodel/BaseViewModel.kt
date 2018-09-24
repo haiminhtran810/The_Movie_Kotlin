@@ -7,7 +7,9 @@ import io.reactivex.disposables.Disposable
 /**
  * Created by HaiMinhTran on 9/10/2018.
  */
-abstract class BaseViewModel : ViewModel() {
+abstract class BaseViewModel<Navigator> : ViewModel() {
+
+    var navigator: Navigator? = null
     var compoDisposable = CompositeDisposable()
     fun addDisposable(disposable: Disposable) {
         compoDisposable.add(disposable)
