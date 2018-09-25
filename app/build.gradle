@@ -63,7 +63,7 @@ android {
             Log.d(TAG, "Debug message here");
         }*/
     }
-    buildToolsVersion '27.0.3'
+    buildToolsVersion '28.0.2'
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
