@@ -6,10 +6,8 @@ import vn.home.app.themoviekotlin.BR
 import vn.home.app.themoviekotlin.R
 import vn.home.app.themoviekotlin.base.fragment.BaseFragment
 import vn.home.app.themoviekotlin.databinding.FragmentWelcomeBinding
-import vn.home.app.themoviekotlin.ui.welcome.WelcomeNavigator
-import vn.home.app.themoviekotlin.ui.welcome.WelcomeViewModel
 
-class MainFragment : BaseFragment<FragmentWelcomeBinding, WelcomeViewModel>(), WelcomeNavigator {
+class MainFragment : BaseFragment<FragmentWelcomeBinding, MainViewModel>(), MainNavigator {
 
     companion object {
         const val TAG = "MainFragment"
@@ -17,7 +15,7 @@ class MainFragment : BaseFragment<FragmentWelcomeBinding, WelcomeViewModel>(), W
         fun newInstance() = MainFragment()
     }
 
-    override val viewModel by viewModel<WelcomeViewModel>()
+    override val viewModel by viewModel<MainViewModel>()
 
     override val bindingVariable: Int
         get() = BR.viewModel
