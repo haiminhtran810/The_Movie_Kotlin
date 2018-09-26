@@ -17,6 +17,5 @@ abstract class BaseViewModel<Navigator> : ViewModel() {
 
     fun onActivityDestroy() {
         compoDisposable.clear()
-        compoDisposable = null!!
     }
 }
