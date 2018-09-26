@@ -1,13 +1,12 @@
 package vn.home.app.themoviekotlin.ui.welcome
 
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.os.Handler
+import org.koin.android.viewmodel.ext.android.viewModel
 import vn.home.app.themoviekotlin.BR
 import vn.home.app.themoviekotlin.R
 import vn.home.app.themoviekotlin.base.fragment.BaseFragment
 import vn.home.app.themoviekotlin.databinding.FragmentWelcomeBinding
-import vn.home.app.themoviekotlin.ui.main.MainFragment
 
 class WelcomeFragment : BaseFragment<FragmentWelcomeBinding, WelcomeViewModel>(), WelcomeNavigator {
 
@@ -19,8 +18,7 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding, WelcomeViewModel>()
         fun newInstance() = WelcomeFragment()
     }
 
-    override var viewModel: WelcomeViewModel = ViewModelProviders.of(this, viewModelFactory).get(
-            WelcomeViewModel::class.java)
+    override val viewModel by viewModel<WelcomeViewModel>()
 
     override val bindingVariable: Int = BR.viewModel
 
@@ -36,9 +34,10 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding, WelcomeViewModel>()
 
     override fun onResume() {
         super.onResume()
-        handler.postDelayed(Runnable {
-            replaceFragment(MainFragment.newInstance(), MainFragment.TAG)
-        }, DELAY_MILLISECONDS)
+        /*handler.postDelayed(
+                Runnable {
+                    replaceFragment(MainFragment.newInstance(), MainFragment.TAG)
+                }, DELAY_MILLISECONDS)*/
     }
 
 }

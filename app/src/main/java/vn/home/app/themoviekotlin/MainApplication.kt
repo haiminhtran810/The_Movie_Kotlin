@@ -1,15 +1,22 @@
 package vn.home.app.themoviekotlin
 
-import dagger.android.AndroidInjector
-import dagger.android.support.DaggerApplication
-import vn.home.app.themoviekotlin.di.AppComponent
-import vn.home.app.themoviekotlin.di.DaggerAppComponent
+import android.app.Application
+import org.koin.android.ext.android.startKoin
+import org.koin.dsl.module.module
+import vn.home.app.themoviekotlin.di.ApiModule
+import vn.home.app.themoviekotlin.di.AppModule
+import vn.home.app.themoviekotlin.di.viewModelModule
 
+class MainApplication : Application() {
+    fun getModule() = module {
+        ApiModule().getModule()
+        AppModule().getContextModule()
+        viewModelModule
+    }
 
-//Generate graph object
-class MainApplication : DaggerApplication() {
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return DaggerAppComponent.builder().create(this)
+    override fun onCreate() {
+        super.onCreate()
+        startKoin(this, listOf(getModule()))
     }
 
 }

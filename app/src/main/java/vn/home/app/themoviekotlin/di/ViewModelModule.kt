@@ -1,36 +1,18 @@
 package vn.home.app.themoviekotlin.di
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import dagger.Binds
-import dagger.Module
-import dagger.multibindings.IntoMap
+import org.koin.android.viewmodel.ext.koin.viewModel
+import org.koin.dsl.module.module
 import vn.home.app.themoviekotlin.MainActivityViewModel
 import vn.home.app.themoviekotlin.ui.main.MainViewModel
 import vn.home.app.themoviekotlin.ui.welcome.WelcomeViewModel
 
-@Suppress("unused")
-@Module
-abstract class ViewModelModule {
 
-    // Binds : tự trả về mà ko cần return như Provides
-    // Ko tự động gen ra như ContributesAndroidInjector
-    @Binds
-    abstract fun bindViewModelFactory(
-            providerFactory: ViewModelProviderFactory): ViewModelProvider.Factory
+val viewModelModule = module {
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(MainActivityViewModel::class)
-    abstract fun bindMainActivityViewModel(mainActivityViewModel: MainActivityViewModel): ViewModel
+    viewModel { MainActivityViewModel() }
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(WelcomeViewModel::class)
-    abstract fun bindWelcomeViewModel(welcomeViewModel: WelcomeViewModel): ViewModel
+    viewModel { WelcomeViewModel() }
 
-    @Binds
-    @IntoMap
-    @ViewModelKey(MainViewModel::class)
-    abstract fun bindMainViewModel(mainViewModel: MainViewModel): ViewModel
+    viewModel { MainViewModel() }
+
 }

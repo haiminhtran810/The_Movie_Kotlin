@@ -8,7 +8,9 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 26
+    
     flavorDimensions "default"
+
     defaultConfig {
         multiDexEnabled true
         applicationId "vn.home.app.themoviekotlin"
@@ -16,6 +18,7 @@ android {
         targetSdkVersion 26
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
         //https://developer.android.com/studio/build/shrink-code
         //To enable code shrinking with ProGuard, add minifyEnabled true to the appropriate build type in your build.gradle file.
@@ -63,11 +66,14 @@ android {
             Log.d(TAG, "Debug message here");
         }*/
     }
+
     buildToolsVersion '28.0.2'
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     productFlavors {
         dev {
             versionCode rootProject.ext.versionCode_dev
@@ -91,6 +97,10 @@ android {
             // app name của ứng dụng
             resValue "string", "app_name", "Movie DB STG"
         }
+    }
+
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
     }
 
     dataBinding {
@@ -165,4 +175,12 @@ dependencies {
 
     // optional - Test helpers for LiveData
     testImplementation "android.arch.core:core-testing:$lifecycle_version"
+
+    // koin
+    // Koin for Android
+    implementation "org.koin:koin-android:$koin_version"
+    // Koin Android Scope feature
+    implementation "org.koin:koin-android-scope:$koin_version"
+    // Koin Android ViewModel feature
+    implementation "org.koin:koin-android-viewmodel:$koin_version"
 }
