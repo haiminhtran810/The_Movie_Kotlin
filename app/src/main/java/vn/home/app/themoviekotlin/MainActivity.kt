@@ -13,7 +13,7 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportFragmentManager.beginTransaction().replace(R.id.parent,
-                WelcomeFragment.newInstance(), WelcomeFragment.TAG)
+                WelcomeFragment.newInstance(), WelcomeFragment.TAG).commitNow()
     }
 
     override fun onBackPressed() {

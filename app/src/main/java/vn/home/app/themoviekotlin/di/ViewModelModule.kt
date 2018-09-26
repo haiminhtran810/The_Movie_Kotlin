@@ -7,7 +7,7 @@ import vn.home.app.themoviekotlin.ui.main.MainViewModel
 import vn.home.app.themoviekotlin.ui.welcome.WelcomeViewModel
 
 
-val viewModelModule = module {
+val viewModelModule = module(override = true) {
 
     viewModel { MainActivityViewModel() }
 
