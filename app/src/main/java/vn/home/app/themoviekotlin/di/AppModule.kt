@@ -5,25 +5,20 @@ import android.content.Context
 import android.content.res.Resources
 import dagger.Module
 import dagger.Provides
+import org.koin.dsl.module.module
 import vn.home.app.themoviekotlin.MainApplication
 import javax.inject.Singleton
 
-@Module(includes = [
-    ViewModelModule::class,
-    ApiModule::class,
-    RepositoryModule::class
-])
 class AppModule {
+    fun getContextModule() = module {
+        factory { provideApplication(get()) }
+        factory { provideResource(get()) }
+        factory { provideContext(get()) }
+    }
 
-    @Provides
-    @Singleton
     fun provideApplication(mainApplication: MainApplication): MainApplication = mainApplication
 
-    @Provides
-    @Singleton
     fun provideResource(application: Application): Resources = application.resources
 
-    @Provides
-    @Singleton
     fun provideContext(application: Application): Context = application
 }

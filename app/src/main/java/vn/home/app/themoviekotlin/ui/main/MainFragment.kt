@@ -1,12 +1,7 @@
 package vn.home.app.themoviekotlin.ui.main
 
-
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import org.koin.android.viewmodel.ext.android.viewModel
 import vn.home.app.themoviekotlin.BR
 import vn.home.app.themoviekotlin.R
 import vn.home.app.themoviekotlin.base.fragment.BaseFragment
@@ -22,8 +17,7 @@ class MainFragment : BaseFragment<FragmentWelcomeBinding, WelcomeViewModel>(), W
         fun newInstance() = MainFragment()
     }
 
-    override var viewModel: WelcomeViewModel = ViewModelProviders.of(this, viewModelFactory).get(
-            WelcomeViewModel::class.java)
+    override val viewModel by viewModel<WelcomeViewModel>()
 
     override val bindingVariable: Int
         get() = BR.viewModel

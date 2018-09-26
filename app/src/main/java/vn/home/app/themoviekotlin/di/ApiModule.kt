@@ -7,6 +7,7 @@ import okhttp3.Cache
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.dsl.module.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import vn.home.app.themoviekotlin.BuildConfig
@@ -15,18 +16,25 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Named
 import javax.inject.Singleton
 
-@Module
 class ApiModule {
+
+    fun getModule() = module {
+        factory { provideOkHttpClient(get(), get(), get()) }
+        factory { provideHeaderInterceptor() }
+        factory { provideRetrofit(get()) }
+        factory { provideApiService(get()) }
+        factory { provideCache(get()) }
+        factory { provideLogging() }
+    }
+
     companion object {
         const val TIME_OUT = 10
     }
 
     // Provides phải cần giá trị trả về như return
     // Singleton tạo vào dụng lại ko có xóa đi
-    @Provides
-    @Singleton
-    @Named("okHttp_client")
-    internal fun provideOkHttpClient(@Named("cache") cache: Cache, @Named("header") header: Interceptor, @Named("logging") logging: Interceptor): OkHttpClient {
+
+    fun provideOkHttpClient(cache: Cache, header: Interceptor, logging: Interceptor): OkHttpClient {
         return OkHttpClient.Builder().cache(cache)
                 .addInterceptor(header)
                 .addInterceptor(logging)
@@ -35,13 +43,12 @@ class ApiModule {
                 .build()
     }
 
-    @Provides
-    @Singleton
-    @Named("header")
-    internal fun provideHeaderInterceptor(): Interceptor {
+
+    fun provideHeaderInterceptor(): Interceptor {
         return Interceptor { chain ->
             val request = chain.request()
-            val newUrl = request.url().newBuilder().addQueryParameter("api_key", BuildConfig.TMBD_API_KEY).build()
+            val newUrl = request.url().newBuilder().addQueryParameter("api_key",
+                    BuildConfig.TMBD_API_KEY).build()
             val newRequest =
                     request.newBuilder().url(newUrl).header("Content-Type", "application/json")
                             .method(request.method(), request.body()).build()
@@ -49,36 +56,25 @@ class ApiModule {
         }
     }
 
-    @Provides
-    @Singleton
-    @Named("app_retrofit")
-    internal fun provideRetrofit(@Named("okHttp_client") okHttpClient: OkHttpClient): Retrofit {
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
                 .baseUrl(BuildConfig.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient).build()
     }
 
-    @Provides
-    @Singleton
-    internal fun provideApiService(@Named("app_retrofit") retrofit: Retrofit): ApiService {
+    fun provideApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
 
     //https://medium.com/@I_Love_Coding/how-does-okhttp-cache-works-851d37dd29cd
     // Cache vs OkHttpClient
-    @Provides
-    @Singleton
-    @Named("cache")
-    internal fun provideCache(application: Application): Cache {
+    fun provideCache(application: Application): Cache {
         val cacheSize = 10 * 1024 * 1024
         return Cache(application.cacheDir, cacheSize.toLong())
     }
 
-    @Provides
-    @Singleton
-    @Named("logging")
-    internal fun provideLogging(): Interceptor {
+    fun provideLogging(): Interceptor {
         val logging = HttpLoggingInterceptor()
         logging.level =
                 if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY

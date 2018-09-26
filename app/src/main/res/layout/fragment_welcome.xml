@@ -10,16 +10,12 @@
             type="vn.home.app.themoviekotlin.ui.welcome.WelcomeViewModel"
             />
     </data>
-    <android.support.constraint.ConstraintLayout
+    <ImageView
+        android:id="@+id/imageView_Welcome"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
-        <ImageView
-            android:id="@+id/imageView_Welcome"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@color/cardview_shadow_start_color"
-            tools:srcCompat="@mipmap/ic_launcher_round"
-            />
-    </android.support.constraint.ConstraintLayout>
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ic_launcher_round"
+        tools:srcCompat="@mipmap/ic_launcher_round"
+        />
 </layout>
