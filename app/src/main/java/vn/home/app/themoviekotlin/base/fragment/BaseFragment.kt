@@ -68,10 +68,9 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
 
     fun replaceFragment(fragment: Fragment, TAG: String?, addToBackStack: Boolean = false,
             transit: Int = -1) {
-        activity?.supportFragmentManager?.beginTransaction()
-                ?.replace(R.id.container, fragment, TAG)?.apply {
-                    commitTransaction(this, addToBackStack, transit)
-                }?.commit()
+        val transaction = activity!!.supportFragmentManager!!.beginTransaction()
+                .replace(R.id.parent, fragment, TAG)
+        commitTransaction(transaction, addToBackStack, transit)
     }
 
     fun replaceChildFragment(

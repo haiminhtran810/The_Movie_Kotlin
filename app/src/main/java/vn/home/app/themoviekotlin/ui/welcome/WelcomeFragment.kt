@@ -7,10 +7,12 @@ import vn.home.app.themoviekotlin.BR
 import vn.home.app.themoviekotlin.R
 import vn.home.app.themoviekotlin.base.fragment.BaseFragment
 import vn.home.app.themoviekotlin.databinding.FragmentWelcomeBinding
+import vn.home.app.themoviekotlin.ui.main.MainFragment
 
 class WelcomeFragment : BaseFragment<FragmentWelcomeBinding, WelcomeViewModel>(), WelcomeNavigator {
 
     private val handler = Handler()
+    private val progressTask = Runnable { gotoMain() }
 
     companion object {
         const val TAG = "WelcomeFragment"
@@ -20,9 +22,11 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding, WelcomeViewModel>()
 
     override val viewModel by viewModel<WelcomeViewModel>()
 
-    override val bindingVariable: Int = BR.viewModel
+    override val bindingVariable: Int
+        get() = BR.viewModel
 
-    override val layoutId: Int = R.layout.fragment_welcome
+    override val layoutId: Int
+        get() = R.layout.fragment_welcome
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -33,11 +37,17 @@ class WelcomeFragment : BaseFragment<FragmentWelcomeBinding, WelcomeViewModel>()
     }
 
     override fun onResume() {
+        handler.postDelayed(progressTask, DELAY_MILLISECONDS)
         super.onResume()
-        /*handler.postDelayed(
-                Runnable {
-                    replaceFragment(MainFragment.newInstance(), MainFragment.TAG)
-                }, DELAY_MILLISECONDS)*/
+    }
+
+    override fun onPause() {
+        handler.removeCallbacks(progressTask)
+        super.onPause()
+    }
+
+    fun gotoMain() {
+        replaceFragment(MainFragment.newInstance(), MainFragment.TAG)
     }
 
 }
