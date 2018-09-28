@@ -1,7 +1,6 @@
 package vn.home.app.themoviekotlin.data.remote
 
 interface ApiService{
-    //https://developers.themoviedb.org/3
 
 }
 

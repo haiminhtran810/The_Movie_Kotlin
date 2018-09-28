@@ -1,4 +1,5 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="vn.home.app.themoviekotlin.ui.main.MainFragment"
     >
@@ -12,6 +13,23 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        ></android.support.constraint.ConstraintLayout>
+        >
+
+        <com.aurelhubert.ahbottomnavigation.AHBottomNavigation
+            android:id="@+id/bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="?android:actionBarSize"
+            android:background="@drawable/custom_bg_bottom_nav"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <FrameLayout
+            android:id="@+id/frame_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="?android:actionBarSize"
+            />
+
+    </android.support.constraint.ConstraintLayout>
 
 </layout>
