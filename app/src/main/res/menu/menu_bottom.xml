@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/tab_top"
+        android:enabled="true"
+        android:icon="@drawable/ic_top_state"
+        app:showAsAction="ifRoom"
+        android:title="@string/top_selling"/>
+
+    <item
+        android:id="@+id/tab_new"
+        android:enabled="true"
+        android:icon="@drawable/ic_top_state"
+        app:showAsAction="ifRoom"
+        android:title="@string/new_release"/>
+
+    <item
+        android:id="@+id/tab_genres"
+        android:enabled="true"
+        android:icon="@drawable/ic_top_state"
+        app:showAsAction="ifRoom"
+        android:title="@string/genres"/>
+
+    <item
+        android:id="@+id/tab_studios"
+        android:enabled="true"
+        android:icon="@drawable/ic_top_state"
+        app:showAsAction="ifRoom"
+        android:title="@string/studios"/>
+</menu>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BottomNavigation">
+        <attr name="bgActiveColor" format="color"/>
+        <attr name="bgInactiveColor" format="color"/>
+        <attr name="titleActiveColor" format="color"/>
+        <attr name="titileInactiveColor" format="color"/>
+        <attr name="iconSize" format="dimension"/>
+        <attr name="textSize" format="dimension"/>
+    </declare-styleable>
+</resources>
+
+    <!--color
+    boolean
+    dimension
+    float
+    integer
+    string
+    fraction
+    enum - normally implicitly defined
+    flag - normally implicitly defined-->
