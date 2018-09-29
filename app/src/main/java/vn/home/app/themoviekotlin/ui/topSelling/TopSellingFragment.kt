@@ -2,28 +2,26 @@ package vn.home.app.themoviekotlin.ui.topSelling
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import org.koin.android.viewmodel.ext.android.viewModel
+import vn.home.app.themoviekotlin.BR
 import vn.home.app.themoviekotlin.R
+import vn.home.app.themoviekotlin.base.fragment.BaseFragment
+import vn.home.app.themoviekotlin.databinding.FragmentTopSellingBinding
 
+class TopSellingFragment : BaseFragment<FragmentTopSellingBinding, TopSellingViewModel>(), TopSellingNavigator {
+    companion object {
+        const val TAG = "TopSellingFragment"
+        fun instance() = TopSellingFragment()
+    }
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+    override val viewModel by viewModel<TopSellingViewModel>()
+    override val bindingVariable: Int
+        get() = BR.viewModel
+    override val layoutId: Int
+        get() = R.layout.fragment_top_selling
 
-/**
- * A simple [Fragment] subclass.
- *
- */
-class TopSellingFragment : Fragment() {
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_top_selling, container, false)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
     }
 
 

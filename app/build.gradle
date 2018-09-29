@@ -107,9 +107,13 @@ android {
     enabled = true
   }
 
+  androidExtensions {
+    experimental = true
+  }
+
   applicationVariants.all { variant ->
-    def BASE_URL = "https://api.themoviedb.org/"
-    def API_KEY = "5fc3a402d4d344ccbb0b1b0f001fc992"
+    def BASE_URL = "https://api.themoviedb.org/3/"
+    def API_KEY = "c733ac6aba3d86364a56d1145bc1d1f9"
     def SMALL_IMAGE_URL = "https://image.tmdb.org/t/p/w200"
     def LARGE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"
     def ORIGINAL_IMAGE_URL = "https://image.tmdb.org/t/p/original"
