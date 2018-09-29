@@ -1,6 +1,10 @@
 package vn.home.app.themoviekotlin.ui.topSelling
 
 import vn.home.app.themoviekotlin.base.viewmodel.BaseViewModel
+import vn.home.app.themoviekotlin.data.Repository.MovieRepository
 
-class TopSellingViewModel : BaseViewModel<TopSellingNavigator>() {
+class TopSellingViewModel constructor(var movieRepository: MovieRepository) : BaseViewModel<TopSellingNavigator>() {
+    init {
+
+    }
 }

@@ -4,6 +4,7 @@ import org.koin.android.viewmodel.ext.koin.viewModel
 import org.koin.dsl.module.module
 import vn.home.app.themoviekotlin.MainActivityViewModel
 import vn.home.app.themoviekotlin.ui.main.MainViewModel
+import vn.home.app.themoviekotlin.ui.topSelling.TopSellingViewModel
 import vn.home.app.themoviekotlin.ui.welcome.WelcomeViewModel
 
 
@@ -14,5 +15,7 @@ val viewModelModule = module(override = true) {
     viewModel { WelcomeViewModel() }
 
     viewModel { MainViewModel() }
+
+    viewModel { TopSellingViewModel(get())}
 
 }
