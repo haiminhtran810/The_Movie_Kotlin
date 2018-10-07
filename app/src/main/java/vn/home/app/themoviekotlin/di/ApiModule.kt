@@ -15,10 +15,10 @@ import vn.home.app.themoviekotlin.di.Properties.TIME_OUT
 import java.util.concurrent.TimeUnit
 
 
-fun getApiModule() = module (override = true){
+val getApiModule = module(override = true) {
     single { provideOkHttpClient(get(), get(), get()) }
     single { provideHeaderInterceptor() }
-    single { provideRetrofit(get()) }
+    single { provideRetrofit() }
     single { provideApiService(get()) }
     single { provideCache(get()) }
     single { provideLogging() }
@@ -53,7 +53,9 @@ fun provideHeaderInterceptor(): Interceptor {
     }
 }
 
-fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
+fun provideRetrofit(): Retrofit {
+    val okHttpClient =
+            OkHttpClient.Builder().addNetworkInterceptor(provideHeaderInterceptor()).addInterceptor(provideLogging()).build()
     return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

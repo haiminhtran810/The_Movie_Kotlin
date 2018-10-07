@@ -10,7 +10,7 @@ class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         startKoin(this, listOf(
-                getApiModule(),
+                getApiModule,
                 getRepositoryModule,
                 viewModelModule
         ))

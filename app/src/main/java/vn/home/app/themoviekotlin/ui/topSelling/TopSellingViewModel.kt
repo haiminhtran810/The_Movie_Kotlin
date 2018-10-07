@@ -7,8 +7,8 @@ class TopSellingViewModel constructor(var movieRepository: MovieRepository) : Ba
     init {
     }
 
-    fun getDataTop() {
-        movieRepository.getTopRated(1).subscribe({
+    fun getDataTop(page : Int) {
+        movieRepository.getTopRated(page).subscribe({
             val data =  it
         },{
             val message = it.message
