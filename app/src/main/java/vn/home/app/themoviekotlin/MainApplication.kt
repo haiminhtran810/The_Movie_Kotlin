@@ -2,6 +2,7 @@ package vn.home.app.themoviekotlin
 
 import android.app.Application
 import org.koin.android.ext.android.startKoin
+import vn.home.app.themo.getRepositoryModule
 import vn.home.app.themoviekotlin.di.*
 
 class MainApplication : Application() {
@@ -10,7 +11,7 @@ class MainApplication : Application() {
         super.onCreate()
         startKoin(this, listOf(
                 getApiModule(),
-                getAppModule(),
+                getRepositoryModule,
                 viewModelModule
         ))
     }

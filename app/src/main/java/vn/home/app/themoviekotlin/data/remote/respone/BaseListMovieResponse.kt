@@ -1,10 +1,10 @@
 package vn.home.app.themoviekotlin.data.remote.respone
 
 import com.google.gson.annotations.SerializedName
-import vn.home.app.themoviekotlin.data.Model.Movie
+import vn.home.app.themoviekotlin.data.model.Movie
 import java.util.ArrayList
 
-open class BaseListMovieReponse<T> {
+open class BaseListMovieResponse<T> {
     @SerializedName("page")
     var page: Int? = 0
     @SerializedName("total_results")

@@ -8,7 +8,7 @@ import vn.home.app.themoviekotlin.data.constants.Constants
 
 val getRepositoryModule = module {
     single { providerDatabaseName() }
-    single<MovieRepository> { MovieRepositoryImpl(get()) }
+    single{ MovieRepositoryImpl(get())as MovieRepository }
 }
 
 fun providerDatabaseName(): String = Constants.DATABASE_NAME

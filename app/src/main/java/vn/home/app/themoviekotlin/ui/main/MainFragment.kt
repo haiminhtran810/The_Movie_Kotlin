@@ -39,6 +39,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(), MainNav
         viewModel.navigator = this
         viewBinding.viewModel = viewModel
         initBottomNavigation()
+        onClickBottomNavigationItem(1)
     }
 
     private fun initBottomNavigation() {
@@ -88,10 +89,10 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(), MainNav
 
     fun newFragmentInstance(position: Int): Fragment {
         return when (position) {
-            Tab.TOP.position -> TopSellingFragment()
-            Tab.GENRES.position -> TopSellingFragment()
-            Tab.NEW.position -> TopSellingFragment()
-            Tab.STUDIOS.position -> TopSellingFragment()
+            Tab.TOP.position -> TopSellingFragment.instance()
+            Tab.GENRES.position -> TopSellingFragment.instance()
+            Tab.NEW.position -> TopSellingFragment.instance()
+            Tab.STUDIOS.position -> TopSellingFragment.instance()
             else -> Fragment()
         }
 
