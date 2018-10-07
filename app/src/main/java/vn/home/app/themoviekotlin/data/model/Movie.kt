@@ -1,4 +1,4 @@
-package vn.home.app.themoviekotlin.data.Model
+package vn.home.app.themoviekotlin.data.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

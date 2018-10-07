@@ -22,6 +22,7 @@ class TopSellingFragment : BaseFragment<FragmentTopSellingBinding, TopSellingVie
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        viewModel.getDataTop()
     }
 
 
