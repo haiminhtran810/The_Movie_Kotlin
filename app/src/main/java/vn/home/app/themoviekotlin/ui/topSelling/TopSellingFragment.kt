@@ -1,7 +1,9 @@
 package vn.home.app.themoviekotlin.ui.topSelling
 
 
+import android.arch.lifecycle.Observer
 import android.os.Bundle
+import android.support.v7.widget.LinearLayoutManager
 import org.koin.android.viewmodel.ext.android.viewModel
 import vn.home.app.themoviekotlin.BR
 import vn.home.app.themoviekotlin.R
@@ -23,5 +25,20 @@ class TopSellingFragment : BaseFragment<FragmentTopSellingBinding, TopSellingVie
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel.getDataTop(1)
+        setAdapterTopSelling()
+        viewModel.listData.observe(this, Observer {
+            var adapter = viewBinding.rcyLoadTopRate.adapter
+            if (adapter is TopSellingAdapter) {
+                adapter.submitList(it)
+            }
+        })
+    }
+
+    private fun setAdapterTopSelling() {
+        val topSellingAdapter = TopSellingAdapter()
+        viewBinding.rcyLoadTopRate.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            adapter = topSellingAdapter
+        }
     }
 }
