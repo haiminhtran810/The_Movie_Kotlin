@@ -7,182 +7,185 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-  compileSdkVersion 26
+    compileSdkVersion 26
 
-  flavorDimensions "default"
+    flavorDimensions "default"
 
-  defaultConfig {
-    multiDexEnabled true
-    applicationId "vn.home.app.themoviekotlin"
-    minSdkVersion 21
-    targetSdkVersion 26
-    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-  }
-
-  buildTypes {
-    //https://developer.android.com/studio/build/shrink-code
-    //To enable code shrinking with ProGuard, add minifyEnabled true to the appropriate build type in your build.gradle file.
-    release {
-      buildConfigField "boolean", "MOCK_DATA", "false"
-      // xuất ra lỗi
-      debuggable false
-      // tối ưu hóa
-      // Shrink your code
-      //Be aware that code shrinking slows down the build time
-      minifyEnabled true
-      // mã hóa
-      useProguard true
-      // Tối giản res
-      //Resource shrinking is available with the Android plugin for Gradle,
-      // which removes unused resources from your packaged app, including unused resources in code libraries
-      shrinkResources = true
-      // the proguardFiles property specifies the following ProGuard rules
-      //Tip: For even more code shrinking, try the proguard-android-optimize.txt file located in the same directory.
-      // It includes the same ProGuard rules, but with other optimizations that perform analysis at the bytecode level—inside and across methods—to reduce your APK size further and help it run faster.
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-    }
-    mock {
-      buildConfigField "boolean", "MOCK_DATA", "true"
-      // xuất ra lỗi
-      debuggable true
-      // tối ưu hóa
-      useProguard false
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-    }
-    debug {
-      buildConfigField "boolean", "MOCK_DATA", "false"
-      // xuất ra lỗi
-      debuggable true
-      useProguard false
-      // tối ưu hóa
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    defaultConfig {
+        multiDexEnabled true
+        applicationId "vn.home.app.themoviekotlin"
+        minSdkVersion 21
+        targetSdkVersion 26
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
-    /*
-    có thẻ sử dụng cho code
-    if (BuildConfig.enableDebugLogging) {
-        Log.d(TAG, "Debug message here");
-    }*/
-  }
+    buildTypes {
+        //https://developer.android.com/studio/build/shrink-code
+        //To enable code shrinking with ProGuard, add minifyEnabled true to the appropriate build type in your build.gradle file.
+        release {
+            buildConfigField "boolean", "MOCK_DATA", "false"
+            // xuất ra lỗi
+            debuggable false
+            // tối ưu hóa
+            // Shrink your code
+            //Be aware that code shrinking slows down the build time
+            minifyEnabled true
+            // mã hóa
+            useProguard true
+            // Tối giản res
+            //Resource shrinking is available with the Android plugin for Gradle,
+            // which removes unused resources from your packaged app, including unused resources in code libraries
+            shrinkResources = true
+            // the proguardFiles property specifies the following ProGuard rules
+            //Tip: For even more code shrinking, try the proguard-android-optimize.txt file located in the same directory.
+            // It includes the same ProGuard rules, but with other optimizations that perform analysis at the bytecode level—inside and across methods—to reduce your APK size further and help it run faster.
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        mock {
+            buildConfigField "boolean", "MOCK_DATA", "true"
+            // xuất ra lỗi
+            debuggable true
+            // tối ưu hóa
+            useProguard false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            buildConfigField "boolean", "MOCK_DATA", "false"
+            // xuất ra lỗi
+            debuggable true
+            useProguard false
+            // tối ưu hóa
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
 
-  buildToolsVersion '28.0.2'
-
-  compileOptions {
-    sourceCompatibility JavaVersion.VERSION_1_8
-    targetCompatibility JavaVersion.VERSION_1_8
-  }
-
-  productFlavors {
-    dev {
-      versionCode rootProject.ext.versionCode_dev
-      versionName rootProject.ext.versionName_dev
-      applicationIdSuffix = ".dev"
-      // app name của ứng dụng
-      resValue "string", "app_name", "Movie DB DEV"
+        /*
+        có thẻ sử dụng cho code
+        if (BuildConfig.enableDebugLogging) {
+            Log.d(TAG, "Debug message here");
+        }*/
     }
-    prd {
-      versionCode rootProject.ext.versionCode_product
-      versionName rootProject.ext.versionName_product
-      applicationIdSuffix = ".prd"
-      // app name của ứng dụng
-      resValue "string", "app_name", "Movie DB PRD"
+
+    buildToolsVersion '28.0.2'
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
-    stg {
-      versionCode rootProject.ext.versionCode_dev
-      versionName rootProject.ext.versionName_dev
-      // khi build sẽ gán và đuôi của applicationId
-      applicationIdSuffix = ".stg"
-      // app name của ứng dụng
-      resValue "string", "app_name", "Movie DB STG"
+
+    productFlavors {
+        dev {
+            versionCode rootProject.ext.versionCode_dev
+            versionName rootProject.ext.versionName_dev
+            applicationIdSuffix = ".dev"
+            // app name của ứng dụng
+            resValue "string", "app_name", "Movie DB DEV"
+        }
+        prd {
+            versionCode rootProject.ext.versionCode_product
+            versionName rootProject.ext.versionName_product
+            applicationIdSuffix = ".prd"
+            // app name của ứng dụng
+            resValue "string", "app_name", "Movie DB PRD"
+        }
+        stg {
+            versionCode rootProject.ext.versionCode_dev
+            versionName rootProject.ext.versionName_dev
+            // khi build sẽ gán và đuôi của applicationId
+            applicationIdSuffix = ".stg"
+            // app name của ứng dụng
+            resValue "string", "app_name", "Movie DB STG"
+        }
     }
-  }
 
-  defaultConfig {
-    vectorDrawables.useSupportLibrary = true
-  }
+    defaultConfig {
+        vectorDrawables.useSupportLibrary = true
+    }
 
-  dataBinding {
-    enabled = true
-  }
+    dataBinding {
+        enabled = true
+    }
 
-  androidExtensions {
-    experimental = true
-  }
+    androidExtensions {
+        experimental = true
+    }
 
-  applicationVariants.all { variant ->
-    def BASE_URL = "https://api.themoviedb.org/3/"
-    def API_KEY = "c733ac6aba3d86364a56d1145bc1d1f9"
-    def SMALL_IMAGE_URL = "https://image.tmdb.org/t/p/w200"
-    def LARGE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"
-    def ORIGINAL_IMAGE_URL = "https://image.tmdb.org/t/p/original"
+    applicationVariants.all { variant ->
+        def BASE_URL = "https://api.themoviedb.org/3/"
+        def API_KEY = "c733ac6aba3d86364a56d1145bc1d1f9"
+        def SMALL_IMAGE_URL = "https://image.tmdb.org/t/p/w200"
+        def LARGE_IMAGE_URL = "https://image.tmdb.org/t/p/w500"
+        def ORIGINAL_IMAGE_URL = "https://image.tmdb.org/t/p/original"
 
 
-    variant.buildConfigField "String", "BASE_URL", "\"${BASE_URL}\""
-    variant.buildConfigField "String", "TMBD_API_KEY", "\"${API_KEY}\""
-    variant.buildConfigField "String", "SMALL_IMAGE_URL", "\"${SMALL_IMAGE_URL}\""
-    variant.buildConfigField "String", "LARGE_IMAGE_URL", "\"${LARGE_IMAGE_URL}\""
-    variant.buildConfigField "String", "ORIGINAL_IMAGE_URL", "\"${ORIGINAL_IMAGE_URL}\""
+        variant.buildConfigField "String", "BASE_URL", "\"${BASE_URL}\""
+        variant.buildConfigField "String", "TMBD_API_KEY", "\"${API_KEY}\""
+        variant.buildConfigField "String", "SMALL_IMAGE_URL", "\"${SMALL_IMAGE_URL}\""
+        variant.buildConfigField "String", "LARGE_IMAGE_URL", "\"${LARGE_IMAGE_URL}\""
+        variant.buildConfigField "String", "ORIGINAL_IMAGE_URL", "\"${ORIGINAL_IMAGE_URL}\""
 
-    //https://developers.themoviedb.org/3
-  }
+        //https://developers.themoviedb.org/3
+    }
 }
 
 dependencies {
-  implementation fileTree(include: ['*.jar'], dir: 'libs')
-  implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-  implementation "com.android.support:appcompat-v7:$version_sp"
-  implementation "com.android.support:support-v4:$version_sp"
-  implementation "com.android.support:recyclerview-v7:27.1.1"
-  implementation "com.android.support:cardview-v7:27.1.1"
-  implementation "com.android.support:design:27.1.1"
-  implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-  implementation 'com.android.support:support-v4:26.1.0'
-  testImplementation 'junit:junit:4.12'
-  androidTestImplementation 'com.android.support.test:runner:1.0.2'
-  androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "com.android.support:appcompat-v7:$version_sp"
+    implementation "com.android.support:support-v4:$version_sp"
+    implementation "com.android.support:recyclerview-v7:27.1.1"
+    implementation "com.android.support:cardview-v7:27.1.1"
+    implementation "com.android.support:design:27.1.1"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.android.support:support-v4:26.1.0'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-  // retrofit
-  implementation 'com.squareup.retrofit2:retrofit:2.4.0'
-  implementation "com.squareup.retrofit2:converter-gson:2.4.0"
-  implementation "com.squareup.okhttp3:logging-interceptor:3.9.1"
-  implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
-  implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:1.0.0'
-  // rxjava
-  implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
-  implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
+    // retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation "com.squareup.retrofit2:converter-gson:2.4.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:3.9.1"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.4.0"
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:1.0.0'
+    // rxjava
+    implementation 'io.reactivex.rxjava2:rxandroid:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.2.2'
 
-  // viewmodel - lifecycle
-  // ViewModel and LiveData
-  implementation "android.arch.lifecycle:extensions:$lifecycle_version"
-  // alternatively - just ViewModel
-  implementation "android.arch.lifecycle:viewmodel:$lifecycle_version" // use -ktx for Kotlin
-  // alternatively - just LiveData
-  implementation "android.arch.lifecycle:livedata:$lifecycle_version"
-  // alternatively - Lifecycles only (no ViewModel or LiveData).
-  //     Support library depends on this lightweight import
-  implementation "android.arch.lifecycle:runtime:$lifecycle_version"
+    // viewmodel - lifecycle
+    // ViewModel and LiveData
+    implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    // alternatively - just ViewModel
+    implementation "android.arch.lifecycle:viewmodel:$lifecycle_version" // use -ktx for Kotlin
+    // alternatively - just LiveData
+    implementation "android.arch.lifecycle:livedata:$lifecycle_version"
+    // alternatively - Lifecycles only (no ViewModel or LiveData).
+    //     Support library depends on this lightweight import
+    implementation "android.arch.lifecycle:runtime:$lifecycle_version"
 
-  annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_version" // use kapt for Kotlin
-  // alternately - if using Java8, use the following instead of compiler
-  implementation "android.arch.lifecycle:common-java8:$lifecycle_version"
+    annotationProcessor "android.arch.lifecycle:compiler:$lifecycle_version" // use kapt for Kotlin
+    // alternately - if using Java8, use the following instead of compiler
+    implementation "android.arch.lifecycle:common-java8:$lifecycle_version"
 
-  // optional - ReactiveStreams support for LiveData
-  implementation "android.arch.lifecycle:reactivestreams:$lifecycle_version"
+    // optional - ReactiveStreams support for LiveData
+    implementation "android.arch.lifecycle:reactivestreams:$lifecycle_version"
 
-  // optional - Test helpers for LiveData
-  testImplementation "android.arch.core:core-testing:$lifecycle_version"
+    // optional - Test helpers for LiveData
+    testImplementation "android.arch.core:core-testing:$lifecycle_version"
 
-  // koin
-  // Koin for Android
-  implementation "org.koin:koin-android:$koin_version"
-  // Koin Android Scope feature
-  implementation "org.koin:koin-android-scope:$koin_version"
-  // Koin Android ViewModel feature
-  implementation "org.koin:koin-android-viewmodel:$koin_version"
+    // koin
+    // Koin for Android
+    implementation "org.koin:koin-android:$koin_version"
+    // Koin Android Scope feature
+    implementation "org.koin:koin-android-scope:$koin_version"
+    // Koin Android ViewModel feature
+    implementation "org.koin:koin-android-viewmodel:$koin_version"
 
-  //ahbottomnavigation
-  implementation 'com.aurelhubert:ahbottomnavigation:2.1.0'
+    //ahbottomnavigation
+    implementation 'com.aurelhubert:ahbottomnavigation:2.1.0'
 
+    // Glide
+    implementation 'com.github.bumptech.glide:glide:4.4.0'
+    kapt 'com.github.bumptech.glide:compiler:4.4.0'
 }
