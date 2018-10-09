@@ -8,9 +8,12 @@ import org.koin.android.viewmodel.ext.android.viewModel
 import vn.home.app.themoviekotlin.BR
 import vn.home.app.themoviekotlin.R
 import vn.home.app.themoviekotlin.base.fragment.BaseFragment
+import vn.home.app.themoviekotlin.base.fragment.BaseLoadMoreRefreshFragment
+import vn.home.app.themoviekotlin.data.model.Movie
+import vn.home.app.themoviekotlin.databinding.FragmentLoadMoreRefreshBinding
 import vn.home.app.themoviekotlin.databinding.FragmentTopSellingBinding
 
-class TopSellingFragment : BaseFragment<FragmentTopSellingBinding, TopSellingViewModel>(), TopSellingNavigator {
+class TopSellingFragment : BaseLoadMoreRefreshFragment<FragmentLoadMoreRefreshBinding, TopSellingViewModel, Movie>(), TopSellingNavigator {
     companion object {
         const val TAG = "TopSellingFragment"
         fun instance() = TopSellingFragment()
@@ -19,24 +22,24 @@ class TopSellingFragment : BaseFragment<FragmentTopSellingBinding, TopSellingVie
     override val viewModel by viewModel<TopSellingViewModel>()
     override val bindingVariable: Int
         get() = BR.viewModel
-    override val layoutId: Int
-        get() = R.layout.fragment_top_selling
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.getDataTop(1)
         setAdapterTopSelling()
-        viewModel.listData.observe(this, Observer {
-            var adapter = viewBinding.rcyLoadTopRate.adapter
-            if (adapter is TopSellingAdapter) {
-                adapter.submitList(it)
-            }
-        })
+        viewModel.apply {
+            listItem.observe(this@TopSellingFragment, Observer {
+                var adapter = viewBinding.recyclerView.adapter
+                if (adapter is TopSellingAdapter) {
+                    adapter.submitList(it)
+                }
+            })
+            firstLoad()
+        }
     }
 
     private fun setAdapterTopSelling() {
         val topSellingAdapter = TopSellingAdapter()
-        viewBinding.rcyLoadTopRate.apply {
+        viewBinding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = topSellingAdapter
         }

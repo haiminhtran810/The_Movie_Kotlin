@@ -28,7 +28,7 @@
 
             <vn.home.app.themoviekotlin.widgets.CustomTextView
                 android:id="@+id/txt_stt"
-                android:layout_width="@dimen/dp_20"
+                android:layout_width="@dimen/dp_30"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 bind:layout_constraintLeft_toLeftOf="parent"
