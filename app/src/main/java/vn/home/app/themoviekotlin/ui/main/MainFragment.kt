@@ -10,6 +10,7 @@ import vn.home.app.themoviekotlin.BR
 import vn.home.app.themoviekotlin.R
 import vn.home.app.themoviekotlin.base.fragment.BaseFragment
 import vn.home.app.themoviekotlin.databinding.FragmentMainBinding
+import vn.home.app.themoviekotlin.ui.genres.GenresFragment
 import vn.home.app.themoviekotlin.ui.topSelling.TopSellingFragment
 import vn.home.app.themoviekotlin.widgets.bottomnavigation.BottomNavigation
 import vn.home.app.themoviekotlin.widgets.bottomnavigation.BottomNavigationAdapter
@@ -39,7 +40,6 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(), MainNav
         viewModel.navigator = this
         viewBinding.viewModel = viewModel
         initBottomNavigation()
-        onClickBottomNavigationItem(1)
     }
 
     private fun initBottomNavigation() {
@@ -52,14 +52,10 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(), MainNav
             setNotificationBackgroundColor(ContextCompat.getColor(context, R.color.vermillion))
             accentColor = ContextCompat.getColor(context, R.color.colorPrimaryDark)
             inactiveColor = ContextCompat.getColor(context, R.color.warmGreyTwo)
-            /*setColoredModeColors(
-                    ContextCompat.getColor(context, R.color.colorPrimaryDark),
-                    ContextCompat.getColor(context, R.color.warmGreyTwo))*/
             setOnTabSelectedListener { position, wasSelected ->
-                mCurrentPositionFragment = position
                 onClickBottomNavigationItem(position)
             }
-
+            mCurrentPositionFragment = Tab.TOP.position
         }
     }
 
@@ -90,8 +86,8 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(), MainNav
     fun newFragmentInstance(position: Int): Fragment {
         return when (position) {
             Tab.TOP.position -> TopSellingFragment.instance()
-            Tab.GENRES.position -> TopSellingFragment.instance()
             Tab.NEW.position -> TopSellingFragment.instance()
+            Tab.GENRES.position -> GenresFragment.instance()
             Tab.STUDIOS.position -> TopSellingFragment.instance()
             else -> Fragment()
         }

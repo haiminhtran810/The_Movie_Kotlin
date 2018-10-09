@@ -27,9 +27,6 @@ class TopSellingAdapter : BaseRecyclerAdapter<Movie, ItemMovieBinding>(DIFF_CALL
 
     override fun createBinding(parent: ViewGroup, viewType: Int): ItemMovieBinding {
         val binding = DataBindingUtil.inflate<ItemMovieBinding>(LayoutInflater.from(parent.context), R.layout.item_movie, parent, false)
-        binding.root.setOnClickListener {
-
-        }
         return binding
     }
 

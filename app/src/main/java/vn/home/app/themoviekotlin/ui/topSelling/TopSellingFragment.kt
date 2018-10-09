@@ -6,12 +6,9 @@ import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import org.koin.android.viewmodel.ext.android.viewModel
 import vn.home.app.themoviekotlin.BR
-import vn.home.app.themoviekotlin.R
-import vn.home.app.themoviekotlin.base.fragment.BaseFragment
 import vn.home.app.themoviekotlin.base.fragment.BaseLoadMoreRefreshFragment
 import vn.home.app.themoviekotlin.data.model.Movie
 import vn.home.app.themoviekotlin.databinding.FragmentLoadMoreRefreshBinding
-import vn.home.app.themoviekotlin.databinding.FragmentTopSellingBinding
 
 class TopSellingFragment : BaseLoadMoreRefreshFragment<FragmentLoadMoreRefreshBinding, TopSellingViewModel, Movie>(), TopSellingNavigator {
     companion object {
