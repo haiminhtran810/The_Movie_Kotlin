@@ -1,21 +1,22 @@
 package vn.home.app.themoviekotlin.ui.topSelling
 
-import android.arch.lifecycle.MutableLiveData
-import vn.home.app.themoviekotlin.base.viewmodel.BaseViewModel
+import vn.home.app.themoviekotlin.base.viewmodel.BaseLoadMoreRefreshViewModel
 import vn.home.app.themoviekotlin.data.Repository.MovieRepository
 import vn.home.app.themoviekotlin.data.model.Movie
-import java.util.ArrayList
 
-class TopSellingViewModel constructor(var movieRepository: MovieRepository) : BaseViewModel<TopSellingNavigator>() {
-    var listData = MutableLiveData<ArrayList<Movie>>()
+class TopSellingViewModel constructor(var movieRepository: MovieRepository) : BaseLoadMoreRefreshViewModel<Movie, TopSellingNavigator>() {
 
-    init {
-    }
-
-    fun getDataTop(page: Int) {
+    override fun loadData(page: Int) {
         movieRepository.getTopRated(page).subscribe({
-            listData.value = it.results
+            currentPage.value = page
+            if (currentPage.value == 1) listItem.value?.clear()
+            if (isRefreshing.value == true) resetLoadMore()
+            val newList = listItem.value ?: arrayListOf()
+            newList.addAll(it.results ?: arrayListOf())
+            listItem.value = newList
+            onLoadSuccess(it.results?.size ?: 0)
         }, {
+            onLoadFail(it)
             val message = it.message
         })
     }

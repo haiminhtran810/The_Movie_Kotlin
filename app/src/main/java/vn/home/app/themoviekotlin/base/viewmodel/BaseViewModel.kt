@@ -1,5 +1,6 @@
 package vn.home.app.themoviekotlin.base.viewmodel
 
+import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
@@ -10,6 +11,7 @@ import io.reactivex.disposables.Disposable
 abstract class BaseViewModel<Navigator> : ViewModel() {
 
     var navigator: Navigator? = null
+    val isLoading = MutableLiveData<Boolean>()
     var compoDisposable = CompositeDisposable()
     fun addDisposable(disposable: Disposable) {
         compoDisposable.add(disposable)

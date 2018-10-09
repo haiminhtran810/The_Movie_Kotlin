@@ -2,6 +2,7 @@ package vn.home.app.themoviekotlin.utils
 
 import android.databinding.BindingAdapter
 import android.graphics.drawable.Drawable
+import android.support.v4.widget.SwipeRefreshLayout
 import android.text.TextUtils
 import android.widget.ImageView
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -34,4 +35,14 @@ fun ImageView.loadImage(url: String? = "", placeholder: Drawable?,
         requestOptions.signature(ObjectKey(file.lastModified().toString()))
     }
     requestBuilder.apply(requestOptions).into(this)
+}
+
+@BindingAdapter("isRefreshing")
+fun SwipeRefreshLayout.customRefreshing(refreshing: Boolean?) {
+    isRefreshing = refreshing == true
+}
+
+@BindingAdapter("onRefreshListener")
+fun SwipeRefreshLayout.customRefreshListener(listener: SwipeRefreshLayout.OnRefreshListener?) {
+    setOnRefreshListener(listener)
 }
