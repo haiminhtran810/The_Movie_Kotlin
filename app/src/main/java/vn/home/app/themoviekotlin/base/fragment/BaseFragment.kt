@@ -40,7 +40,7 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding, ViewModel : BaseViewM
             //https://developer.android.com/reference/android/databinding/ViewDataBinding
             setVariable(bindingVariable, viewModel)
             setLifecycleOwner(this@BaseFragment)
-            root.isClickable = false
+            root.isClickable = true
             // chưa biết thằng này xử lý thế nào
             executePendingBindings()
         }

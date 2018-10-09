@@ -8,10 +8,11 @@
     <!-- TODO: Update blank fragment layout -->
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@android:color/white">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rcy_load_top_rate"
+            android:id="@+id/rcy_genres"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </android.support.constraint.ConstraintLayout>

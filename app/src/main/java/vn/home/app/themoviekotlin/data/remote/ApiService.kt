@@ -3,11 +3,15 @@ package vn.home.app.themoviekotlin.data.remote
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
+import vn.home.app.themoviekotlin.data.remote.respone.GetGenreListResponse
 import vn.home.app.themoviekotlin.data.remote.respone.GetMovieListResponse
 
 interface ApiService {
     @GET("movie/top_rated")
     fun getTopRated(@Query("page") page: Int): Single<GetMovieListResponse>
+
+    @GET("genre/movie/list")
+    fun getGenres(): Single<GetGenreListResponse>
 }
 
 object ApiParams {
