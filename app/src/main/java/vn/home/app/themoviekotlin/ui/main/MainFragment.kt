@@ -56,6 +56,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(), MainNav
                 onClickBottomNavigationItem(position)
             }
             mCurrentPositionFragment = Tab.TOP.position
+            onClickBottomNavigationItem(mCurrentPositionFragment)
         }
     }
 

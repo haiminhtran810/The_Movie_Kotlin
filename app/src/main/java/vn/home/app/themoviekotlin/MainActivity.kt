@@ -23,7 +23,6 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onBackPressed() {
-        val currentFragment = supportFragmentManager.findFragmentById(R.id.parent)
         super.onBackPressed()
     }
 }

@@ -6,7 +6,6 @@ import vn.home.app.themo.getRepositoryModule
 import vn.home.app.themoviekotlin.di.*
 
 class MainApplication : Application() {
-
     override fun onCreate() {
         super.onCreate()
         startKoin(this, listOf(
@@ -15,5 +14,4 @@ class MainApplication : Application() {
                 viewModelModule
         ))
     }
-
 }

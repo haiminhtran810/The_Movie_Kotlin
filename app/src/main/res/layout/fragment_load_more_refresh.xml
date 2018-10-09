@@ -16,7 +16,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/white">
+        android:background="@color/pinkishGrey">
 
         <ProgressBar
             android:id="@+id/progress_load_more"
@@ -29,23 +29,33 @@
             bind:layout_constraintEnd_toEndOf="parent"
             bind:layout_constraintStart_toStartOf="parent" />
 
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/refresh_layout"
+        <android.support.v7.widget.CardView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            bind:isRefreshing="@{ viewModel.isRefreshing }"
+            android:layout_marginStart="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_10"
+            bind:cardCornerRadius="@dimen/dp_4"
             bind:layout_constraintBottom_toTopOf="@+id/progress_load_more"
             bind:layout_constraintEnd_toEndOf="parent"
             bind:layout_constraintStart_toStartOf="parent"
-            bind:layout_constraintTop_toTopOf="parent"
-            bind:onRefreshListener="@{ viewModel.onRefreshListener }">
+            bind:layout_constraintTop_toTopOf="parent">
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view"
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/refresh_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                bind:onScrollListener="@{ viewModel.onScrollListener }" />
+                bind:isRefreshing="@{ viewModel.isRefreshing }"
+                bind:onRefreshListener="@{ viewModel.onRefreshListener }">
 
-        </android.support.v4.widget.SwipeRefreshLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    bind:onScrollListener="@{ viewModel.onScrollListener }" />
+
+            </android.support.v4.widget.SwipeRefreshLayout>
+        </android.support.v7.widget.CardView>
     </android.support.constraint.ConstraintLayout>
+
 </layout>

@@ -12,8 +12,8 @@
 
         <ImageView
             android:id="@+id/icon_genres"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="@dimen/dp_38"
+            android:layout_height="@dimen/dp_38"
             android:src="@drawable/ic_top_true"
             bind:layout_constraintBottom_toBottomOf="parent"
             bind:layout_constraintTop_toTopOf="parent"

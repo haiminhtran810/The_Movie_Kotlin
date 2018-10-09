@@ -11,9 +11,14 @@
     <!--This Drawable is overlaid over the foreground of the Window's content area,
     usually to place a shadow below the title.-->
     <style name="AppTheme.NoActionBar" parent="AppTheme">
-        <item name="android:windowContentOverlay">@null</item>
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
+
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
     </style>
 
+    <style name="ViewDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/dp_1</item>
+        <item name="android:background">@color/pinkishGrey</item>
+    </style>
 </resources>
