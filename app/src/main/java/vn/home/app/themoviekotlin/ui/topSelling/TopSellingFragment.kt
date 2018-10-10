@@ -49,10 +49,11 @@ class TopSellingFragment : BaseLoadMoreRefreshFragment<FragmentLoadMoreRefreshBi
     }
 
     fun onClickItemMore(menuItem: MenuItem) {
-        val a = menuItem
+
     }
 
     fun onClickItem(movie: Movie) {
-        val a = movie
+        viewModel.insetMovie(movie)
+        viewModel.findMovieById(movie.id)
     }
 }

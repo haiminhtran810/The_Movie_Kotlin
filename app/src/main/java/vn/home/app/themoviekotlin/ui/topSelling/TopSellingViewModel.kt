@@ -20,4 +20,16 @@ class TopSellingViewModel constructor(var movieRepository: MovieRepository) : Ba
             val message = it.message
         })
     }
+
+    fun insetMovie(movie: Movie) {
+        movieRepository.insertMovie(movie)
+    }
+
+    fun findMovieById(id: String) {
+        movieRepository.findMovieById(id).subscribe({
+            val a = it
+        }, {
+            val a = it.message
+        })
+    }
 }

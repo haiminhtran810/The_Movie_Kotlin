@@ -1,6 +1,5 @@
 package vn.home.app.themoviekotlin.ui.topSelling
 
-import android.content.Context
 import android.databinding.DataBindingUtil
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.PopupMenu
