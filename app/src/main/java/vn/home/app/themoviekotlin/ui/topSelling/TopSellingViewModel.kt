@@ -1,7 +1,7 @@
 package vn.home.app.themoviekotlin.ui.topSelling
 
 import vn.home.app.themoviekotlin.base.viewmodel.BaseLoadMoreRefreshViewModel
-import vn.home.app.themoviekotlin.data.Repository.MovieRepository
+import vn.home.app.themoviekotlin.data.source.remote.Repository.MovieRepository
 import vn.home.app.themoviekotlin.data.model.Movie
 
 class TopSellingViewModel constructor(var movieRepository: MovieRepository) : BaseLoadMoreRefreshViewModel<Movie, TopSellingNavigator>() {
