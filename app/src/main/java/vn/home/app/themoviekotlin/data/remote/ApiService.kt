@@ -5,13 +5,17 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 import vn.home.app.themoviekotlin.data.remote.respone.GetGenreListResponse
 import vn.home.app.themoviekotlin.data.remote.respone.GetMovieListResponse
+import vn.home.app.themoviekotlin.data.remote.respone.GetUpComingListResponse
 
 interface ApiService {
     @GET("movie/top_rated")
-    fun getTopRated(@Query("page") page: Int): Single<GetMovieListResponse>
+    fun getTopRated(@Query(ApiParams.PAGE) page: Int): Single<GetMovieListResponse>
 
     @GET("genre/movie/list")
     fun getGenres(): Single<GetGenreListResponse>
+
+    @GET("movie/upcoming")
+    fun getMovieUpComing(@Query(ApiParams.PAGE) page: Int): Single<GetUpComingListResponse>
 }
 
 object ApiParams {
