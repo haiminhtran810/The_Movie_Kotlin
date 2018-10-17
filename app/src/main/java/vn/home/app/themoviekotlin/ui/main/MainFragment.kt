@@ -11,6 +11,7 @@ import vn.home.app.themoviekotlin.R
 import vn.home.app.themoviekotlin.base.fragment.BaseFragment
 import vn.home.app.themoviekotlin.databinding.FragmentMainBinding
 import vn.home.app.themoviekotlin.ui.genres.GenresFragment
+import vn.home.app.themoviekotlin.ui.newrelease.UpcomingFragment
 import vn.home.app.themoviekotlin.ui.topSelling.TopSellingFragment
 import vn.home.app.themoviekotlin.widgets.bottomnavigation.BottomNavigation
 import vn.home.app.themoviekotlin.widgets.bottomnavigation.BottomNavigationAdapter
@@ -44,7 +45,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(), MainNav
 
     private fun initBottomNavigation() {
         mBottomNavigator = viewBinding.bottomNavigation
-        val bottomNavigationAdapter = AHBottomNavigationAdapter(activity, R.menu.menu_bottom)
+        val bottomNavigationAdapter = AHBottomNavigationAdapter(this!!.activity, R.menu.menu_bottom)
         bottomNavigationAdapter.setupWithBottomNavigation(mBottomNavigator)
         mBottomNavigator!!.apply {
             titleState = AHBottomNavigation.TitleState.ALWAYS_SHOW
@@ -87,7 +88,7 @@ class MainFragment : BaseFragment<FragmentMainBinding, MainViewModel>(), MainNav
     fun newFragmentInstance(position: Int): Fragment {
         return when (position) {
             Tab.TOP.position -> TopSellingFragment.instance()
-            Tab.NEW.position -> TopSellingFragment.instance()
+            Tab.NEW.position -> UpcomingFragment.instance()
             Tab.GENRES.position -> GenresFragment.instance()
             Tab.STUDIOS.position -> TopSellingFragment.instance()
             else -> Fragment()

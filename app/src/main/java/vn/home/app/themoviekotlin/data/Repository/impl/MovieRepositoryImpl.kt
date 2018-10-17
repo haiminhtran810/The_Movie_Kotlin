@@ -7,8 +7,13 @@ import vn.home.app.themoviekotlin.data.Repository.MovieRepository
 import vn.home.app.themoviekotlin.data.remote.ApiService
 import vn.home.app.themoviekotlin.data.remote.respone.GetGenreListResponse
 import vn.home.app.themoviekotlin.data.remote.respone.GetMovieListResponse
+import vn.home.app.themoviekotlin.data.remote.respone.GetUpComingListResponse
 
 class MovieRepositoryImpl constructor(val apiService: ApiService) : MovieRepository {
+    override fun getMovieUpComing(page: Int): Single<GetUpComingListResponse> {
+        return apiService.getMovieUpComing(page).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
+    }
+
     override fun getGenres(): Single<GetGenreListResponse> {
         return apiService.getGenres().subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread())
     }
