@@ -1,8 +1,7 @@
 package vn.home.app.themoviekotlin.ui.newrelease
 
 import vn.home.app.themoviekotlin.base.viewmodel.BaseLoadMoreRefreshViewModel
-import vn.home.app.themoviekotlin.base.viewmodel.BaseViewModel
-import vn.home.app.themoviekotlin.data.Repository.MovieRepository
+import vn.home.app.themoviekotlin.data.source.remote.Repository.MovieRepository
 import vn.home.app.themoviekotlin.data.model.Movie
 
 class UpcomingViewModel constructor(var movieRepository: MovieRepository) : BaseLoadMoreRefreshViewModel<Movie, UpcomingNavigator>() {

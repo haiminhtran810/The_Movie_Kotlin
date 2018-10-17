@@ -1,4 +1,4 @@
-package vn.home.app.themoviekotlin.data.remote.respone
+package vn.home.app.themoviekotlin.data.source.remote.respone
 
 import com.google.gson.annotations.SerializedName
 import vn.home.app.themoviekotlin.data.model.Genre

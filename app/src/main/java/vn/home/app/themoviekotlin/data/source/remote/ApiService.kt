@@ -1,11 +1,11 @@
-package vn.home.app.themoviekotlin.data.remote
+package vn.home.app.themoviekotlin.data.source.remote
 
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
-import vn.home.app.themoviekotlin.data.remote.respone.GetGenreListResponse
-import vn.home.app.themoviekotlin.data.remote.respone.GetMovieListResponse
-import vn.home.app.themoviekotlin.data.remote.respone.GetUpComingListResponse
+import vn.home.app.themoviekotlin.data.source.remote.respone.GetGenreListResponse
+import vn.home.app.themoviekotlin.data.source.remote.respone.GetMovieListResponse
+import vn.home.app.themoviekotlin.data.source.remote.respone.GetUpComingListResponse
 
 interface ApiService {
     @GET("movie/top_rated")

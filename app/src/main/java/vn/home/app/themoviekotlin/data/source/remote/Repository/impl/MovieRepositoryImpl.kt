@@ -1,13 +1,13 @@
-package vn.home.app.themoviekotlin.data.Repository.impl
+package vn.home.app.themoviekotlin.data.source.remote.Repository.impl
 
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import vn.home.app.themoviekotlin.data.Repository.MovieRepository
-import vn.home.app.themoviekotlin.data.remote.ApiService
-import vn.home.app.themoviekotlin.data.remote.respone.GetGenreListResponse
-import vn.home.app.themoviekotlin.data.remote.respone.GetMovieListResponse
-import vn.home.app.themoviekotlin.data.remote.respone.GetUpComingListResponse
+import vn.home.app.themoviekotlin.data.source.remote.Repository.MovieRepository
+import vn.home.app.themoviekotlin.data.source.remote.ApiService
+import vn.home.app.themoviekotlin.data.source.remote.respone.GetGenreListResponse
+import vn.home.app.themoviekotlin.data.source.remote.respone.GetMovieListResponse
+import vn.home.app.themoviekotlin.data.source.remote.respone.GetUpComingListResponse
 
 class MovieRepositoryImpl constructor(val apiService: ApiService) : MovieRepository {
     override fun getMovieUpComing(page: Int): Single<GetUpComingListResponse> {
